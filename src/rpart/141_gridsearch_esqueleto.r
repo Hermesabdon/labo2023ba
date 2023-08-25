@@ -12,7 +12,6 @@ require("parallel")
 PARAM <- list()
 # reemplazar por las propias semillas
 PARAM$semillas <- c(100129, 100151, 100153, 100213, 200029)
-
 semillas <- PARAM$semillas
 #------------------------------------------------------------------------------
 # particionar agrega una columna llamada fold a un dataset
@@ -104,7 +103,7 @@ dataset <- dataset[clase_ternaria != ""]
 # HT  representa  Hiperparameter Tuning
 dir.create("./exp/", showWarnings = FALSE)
 dir.create("./exp/HT2020/", showWarnings = FALSE)
-archivo_salida <- "./exp/HT2020/gridsearch.txt"
+archivo_salida <- "./exp/HT2020/gridsearch01.txt"
 
 # Escribo los titulos al archivo donde van a quedar los resultados
 # atencion que si ya existe el archivo, esta instruccion LO SOBREESCRIBE,
@@ -115,35 +114,43 @@ cat(
   sep = "",
   "max_depth", "\t",
   "min_split", "\t",
+  "min_bucket", "\t",
+  "vcp", "\t",
   "ganancia_promedio", "\n"
 )
 
 
 # itero por los loops anidados para cada hiperparametro
 
-for (vmax_depth in c(4, 6, 8, 10, 12, 14)) {
-  for (vmin_split in c(1000, 800, 600, 400, 200, 100, 50, 20, 10)) {
-    # notar como se agrega
+for (vmax_depth in c(9, 5, 6, 7, 8, 9, 10)) {
+  for (vmin_split in c(300, 350, 400, 900, 500, 550, 600, 650, 700)) {
+    for (vcp in c(-0.3, -0.4, -0.5, -1)) {
+      for (vmin_bucket in c(75, 80, 85, 90, 95, 100, 105, 110, 115)) {
 
-    # vminsplit  minima cantidad de registros en un nodo para hacer el split
-    param_basicos <- list(
-      "cp" = -0.5, # complejidad minima
-      "minsplit" = vmin_split,
-      "minbucket" = 100, # minima cantidad de registros en una hoja
-      "maxdepth" = vmax_depth
-    ) # profundidad máxima del arbol
+        # Definir parámetros básicos
+        param_basicos <- list(
+          "cp" = vcp,
+          "minsplit" = vmin_split,
+          "minbucket" = vmin_bucket,
+          "maxdepth" = vmax_depth
+        )
 
-    # Un solo llamado, con la semilla 17
-    ganancia_promedio <- ArbolesMontecarlo(semillas, param_basicos)
+        # Un solo llamado, con la semilla 17
+        ganancia_promedio <- ArbolesMontecarlo(semillas, param_basicos)
 
-    # escribo los resultados al archivo de salida
-    cat(
-      file = archivo_salida,
-      append = TRUE,
-      sep = "",
-      vmax_depth, "\t",
-      vmin_split, "\t",
-      ganancia_promedio, "\n"
-    )
+        # Escribir los resultados al archivo de salida
+        cat(
+            file = archivo_salida,
+            append = TRUE,
+            sep = "\t",    # Usar \t para separar los valores
+            vmax_depth, "\t",
+            vmin_split, "\t",
+            vmin_bucket, "\t",
+            vcp, "\t",  # Agregar el valor de vcp aquí
+            ganancia_promedio, "\n"  # Agregar la ganancia promedio aquí)
+        )
+      }
+    }
   }
 }
+# ...
