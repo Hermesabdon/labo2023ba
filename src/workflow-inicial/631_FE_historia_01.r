@@ -45,17 +45,17 @@ PARAM$Tendencias2$ratiomax <- FALSE
 
 
 PARAM$RandomForest$run <- TRUE
-PARAM$RandomForest$num.trees <- 18
-PARAM$RandomForest$max.depth <- 5
-PARAM$RandomForest$min.node.size <- 900
-PARAM$RandomForest$mtry <- 45
+PARAM$RandomForest$num.trees <- 20
+PARAM$RandomForest$max.depth <- 4
+PARAM$RandomForest$min.node.size <- 1000
+PARAM$RandomForest$mtry <- 40
 PARAM$RandomForest$semilla <- 100129 # cambiar por la propia semilla
 
 
 # varia de 0.0 a 2.0, si es 0.0 NO se activan
-PARAM$CanaritosAsesinos$ratio <- 1.0
+PARAM$CanaritosAsesinos$ratio <- 2.0
 # desvios estandar de la media, para el cutoff
-PARAM$CanaritosAsesinos$desvios <- 3.0
+PARAM$CanaritosAsesinos$desvios <- 4.0
 # cambiar por la propia semilla
 PARAM$CanaritosAsesinos$semilla <- 100129
 
@@ -81,7 +81,7 @@ GrabarOutput <- function() {
 #  tendencia calculada con cuadrados minimos
 # la formula de calculo de la tendencia puede verse en
 #  https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Book%3A_Introductory_Statistics_(Shafer_and_Zhang)/10%3A_Correlation_and_Regression/10.04%3A_The_Least_Squares_Regression_Line
-# para la maxíma velocidad esta funcion esta escrita en lenguaje C,
+# para la max�ma velocidad esta funcion esta escrita en lenguaje C,
 # y no en la porqueria de R o Python
 
 cppFunction("NumericVector fhistC(NumericVector pcolumna, IntegerVector pdesde )
@@ -247,7 +247,7 @@ AgregaVarRandomForest <- function(
       (clase01 == 1 | azar < 0.10))]
 
   # imputo los nulos, ya que ranger no acepta nulos
-  # Leo Breiman, ¿por que le temias a los nulos?
+  # Leo Breiman, �por que le temias a los nulos?
   set.seed(semilla, kind = "L'Ecuyer-CMRG")
   dataset_rf <- na.roughfix(dataset_rf)
 
@@ -320,7 +320,7 @@ fganancia_lgbm_meseta <- function(probs, datos) {
   tbl[, gan_acum := cumsum(gan)]
   setorder(tbl, -gan_acum) # voy por la meseta
 
-  gan <- mean(tbl[1:500, gan_acum]) # meseta de tamaño 500
+  gan <- mean(tbl[1:500, gan_acum]) # meseta de tama�o 500
 
   pos_meseta <- tbl[1:500, median(posicion)]
   VPOS_CORTE <<- c(VPOS_CORTE, pos_meseta)
@@ -336,7 +336,7 @@ fganancia_lgbm_meseta <- function(probs, datos) {
 #  de la capa geologica de canaritos
 # se llama varias veces, luego de agregar muchas variables nuevas,
 #  para ir reduciendo la cantidad de variables
-# y así hacer lugar a nuevas variables importantes
+# y as� hacer lugar a nuevas variables importantes
 
 GVEZ <- 1
 
