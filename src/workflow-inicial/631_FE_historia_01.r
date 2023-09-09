@@ -49,7 +49,7 @@ PARAM$RandomForest$num.trees <- 18
 PARAM$RandomForest$max.depth <- 5
 PARAM$RandomForest$min.node.size <- 900
 PARAM$RandomForest$mtry <- 45
-PARAM$RandomForest$semilla <- 100128 # cambiar por la propia semilla
+PARAM$RandomForest$semilla <- 100129 # cambiar por la propia semilla
 
 
 # varia de 0.0 a 2.0, si es 0.0 NO se activan
