@@ -20,15 +20,15 @@ PARAM$exp_input <- "FE6310"
 
 PARAM$future <- c(202109)
 PARAM$final_train <- c(
-    100129, 100151, 100153, 100213, 200029, 101221, 
-    102761, 104729, 106147, 106591, 107099, 107347, 108863, 109037, 109579, 
-    110119, 110597, 110909, 111227, 111487
+  202107, 202106, 202105, 202104, 202103, 202102,
+  202101, 202012, 202011, 202010, 202009, 202008, 202002, 202001, 201912,
+  201911, 201910, 201909
 )
 
 PARAM$train$training <- c(
-    100129, 100151, 100153, 100213, 200029, 101221, 
-    102761, 104729, 106147, 106591, 107099, 107347, 108863, 109037, 109579, 
-    110119, 110597, 110909, 111227, 111487
+  202105, 202104, 202103, 202102, 202101,
+  202012, 202011, 202010, 202009, 202008, 202002, 202001, 201912, 201911,
+  201910, 201909, 201908, 201907
 )
 
 PARAM$train$validation <- c(202106)
@@ -36,7 +36,7 @@ PARAM$train$testing <- c(202107)
 
 # Atencion  0.1  de  undersampling de la clase mayoritaria,  los CONTINUA
 # 1.0 significa NO undersampling ,  0.1  es quedarse con el 10% de los CONTINUA
-PARAM$train$undersampling <- 0.25
+PARAM$train$undersampling <- 0.1
 
 PARAM$train$semilla <- 100129 # cambiar por su propia semilla  !!!
 
