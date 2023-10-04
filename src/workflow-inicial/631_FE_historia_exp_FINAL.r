@@ -19,7 +19,7 @@ require("lightgbm")
 PARAM <- list()
 PARAM$experimento <- "FINAL_EXP_FE6310"
 
-PARAM$exp_input <- "FINAL_EXP0_DR6210"
+PARAM$exp_input <- "FINAL_EXP_DR6210"
 
 PARAM$lag1 <- TRUE
 PARAM$lag2 <- TRUE
@@ -49,15 +49,15 @@ PARAM$RandomForest$num.trees <- 20
 PARAM$RandomForest$max.depth <- 4
 PARAM$RandomForest$min.node.size <- 1000
 PARAM$RandomForest$mtry <- 40
-PARAM$RandomForest$semilla <- 100129 # cambiar por la propia semilla
+PARAM$RandomForest$semilla <- 102191 # cambiar por la propia semilla
 
 
 # varia de 0.0 a 2.0, si es 0.0 NO se activan
-PARAM$CanaritosAsesinos$ratio <- 2.0
+PARAM$CanaritosAsesinos$ratio <- 0.25
 # desvios estandar de la media, para el cutoff
-PARAM$CanaritosAsesinos$desvios <- 0.5
+PARAM$CanaritosAsesinos$desvios <- 50
 # cambiar por la propia semilla
-PARAM$CanaritosAsesinos$semilla <- 100129
+PARAM$CanaritosAsesinos$semilla <- 102191
 
 PARAM$home <- "~/buckets/b1/"
 # FIN Parametros del script
